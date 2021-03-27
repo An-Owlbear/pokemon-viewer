@@ -42,7 +42,7 @@ const Search = () => {
         <button className="bg-red-500 w-32 p-2 rounded text-white" type="submit">Search</button>
       </form>
       <ul className="mt-6 flex flex-row flex-wrap justify-center">
-        {listPokemon.map((item, id) => <li key={id}><SearchLink name={item.name} /></li>)}
+        {listPokemon.map(item => <li key={item.name}><SearchLink name={item.name} /></li>)}
       </ul>
     </div>
   );
