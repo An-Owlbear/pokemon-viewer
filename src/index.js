@@ -1,9 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import './index.css';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import Navbar from './components/navbar';
+import Index from './pages';
+import Search from './pages/search';
 
 const Home = () => {
   return (
-    <div>Hello world!</div>
+      <Router>
+        <Navbar />
+        <Switch>
+          <Route path="/search">
+            <Search />
+          </Route>
+          <Route path="/">
+            <Index />
+          </Route>
+        </Switch>
+      </Router>
   );
 }
 
