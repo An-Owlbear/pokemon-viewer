@@ -15,7 +15,7 @@ const Home = () => {
   return (
     <Provider store={store}>
       <Router>
-        <Navbar />
+        <Navbar className="sticky top-0 z-10" />
         <Switch>
           <Route path="/search">
             <Search />
