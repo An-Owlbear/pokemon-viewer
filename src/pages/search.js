@@ -15,15 +15,22 @@ const Search = () => {
   const [listPokemon, setListPokemon] = useState(pokemon);
   const [search, setSearch] = useState('');
 
-  // Loads pokemon from the api
-  const loadPokemon = async () => {
-    const response = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=20');
-    dispatch(setPokemon(response.data.results));
-    setListPokemon(response.data.results);
-    setLoading(false)
-  }
+  useEffect(() => {
+    // Loads pokemon from the api
+    const loadPokemon = async () => {
+      // Returns if data is already loaded
+      if (pokemon.length !== 0) {
+        return;
+      }
 
-  useEffect(() => { loadPokemon(); }, [])
+      // Requests and loads data
+      const response = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=20');
+      dispatch(setPokemon(response.data.results));
+      setListPokemon(response.data.results);
+      setLoading(false)
+    }
+    loadPokemon();
+  }, [dispatch, pokemon])
 
   // Updates the search term value
   const updateSearch = (e) => setSearch(e.target.value);
