@@ -3,10 +3,12 @@ import React, { useState } from 'react';
 const TextInput = ({ placeholder, className, onBlur }) => {
   const [input, setInput] = useState('');
 
+  // Updates the input value
   const updateValue = (e) => {
     setInput(e.target.value);
   }
 
+  // Blurs and refocuses the form if enter is pressed
   const onEnter = (e) => {
     if (e.key === 'Enter') {
       e.currentTarget.blur();

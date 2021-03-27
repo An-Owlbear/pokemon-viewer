@@ -6,15 +6,14 @@ import TextInput from '../components/textInput';
 const Search = () => {
   const [loading, setLoading ] = useState(true);
   const [pokemon, setPokemon] = useState([]);
-  const [results, setResults] = useState([]);
+  const [listPokemon, setListPokemon] = useState([]);
   const [search, setSearch] = useState('');
 
   // Loads pokemon from the api
   const loadPokemon = async () => {
-    const response = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=-1')
-    const pokemonResult = response.data.results.map((x, id) => ({...x, id: id + 1 }))
-    setPokemon(pokemonResult);
-    setResults(pokemonResult);
+    const response = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=20')
+    setPokemon(response.data.results);
+    setListPokemon(response.data.results);
     setLoading(false)
   }
 
@@ -27,7 +26,7 @@ const Search = () => {
   const searchPokemon = (e) => {
     e.preventDefault();
     const results = pokemon.filter(x => x.name.includes(search));
-    setResults(results);
+    setListPokemon(results);
   }
 
   return (
@@ -36,8 +35,8 @@ const Search = () => {
         <TextInput className="w-full" placeholder="Search" onBlur={updateSearch} />
         <button className="bg-red-500 w-32 p-2 rounded text-white" type="submit">Search</button>
       </form>
-      <ul className="mt-6 p-2 border rounded border-gray-500 divide-solid">
-        {results.map((item, id) => <li key={id}><SearchLink id={item.id} name={item.name} /></li>)}
+      <ul className="mt-6 flex flex-row flex-wrap justify-center">
+        {listPokemon.map((item, id) => <li key={id}><SearchLink name={item.name} /></li>)}
       </ul>
     </div>
   );
