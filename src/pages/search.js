@@ -2,17 +2,23 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import SearchLink from '../components/searchLink';
 import TextInput from '../components/textInput';
+import { useDispatch, useSelector } from 'react-redux';
+import { setPokemon } from '../reducers/pokemonReducer';
 
 const Search = () => {
+  // Loads pokemon from store
+  const dispatch = useDispatch();
+  const pokemon = useSelector(x => x.pokemon);
+
+  // Component state
   const [loading, setLoading ] = useState(true);
-  const [pokemon, setPokemon] = useState([]);
-  const [listPokemon, setListPokemon] = useState([]);
+  const [listPokemon, setListPokemon] = useState(pokemon);
   const [search, setSearch] = useState('');
 
   // Loads pokemon from the api
   const loadPokemon = async () => {
-    const response = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=20')
-    setPokemon(response.data.results);
+    const response = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=20');
+    dispatch(setPokemon(response.data.results));
     setListPokemon(response.data.results);
     setLoading(false)
   }

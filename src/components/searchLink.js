@@ -6,9 +6,9 @@ const SearchLink = ({ name }) => {
   const [pokemonInfo, setPokemonInfo] = useState({});
   const [loading, setLoading] = useState(true);
 
+  // Loads pokemon information
   const loadInfo = async () => {
     const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`);
-    console.log(response.data);
     setPokemonInfo(response.data);
     setLoading(false);
   }
