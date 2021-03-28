@@ -19,7 +19,7 @@ const Home = () => {
       <Router>
         <Navbar className="sticky top-0 z-10" />
         <div className="flex flex-row">
-          <div className="flex-grow">
+          <div className="flex-grow overflow-x-hidden">
             <Switch>
               <Route path="/pokemon/:id" component={Pokemon} />
               <Route path="/team-builder">
