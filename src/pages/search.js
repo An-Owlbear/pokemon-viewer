@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import SearchLink from '../components/searchLink';
 import TextInput from '../components/textInput';
@@ -14,6 +14,7 @@ const Search = () => {
   const [loading, setLoading ] = useState(true);
   const [listPokemon, setListPokemon] = useState(pokemon);
   const [search, setSearch] = useState('');
+  const [limit, setLimit] = useState(20);
 
   useEffect(() => {
     // Loads pokemon from the api
@@ -24,10 +25,10 @@ const Search = () => {
       }
 
       // Requests and loads data
-      const response = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=20');
+      const response = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=-1');
       dispatch(setPokemon(response.data.results));
       setListPokemon(response.data.results);
-      setLoading(false)
+      setLoading(false);
     }
     loadPokemon();
   }, [dispatch, pokemon])
@@ -38,9 +39,11 @@ const Search = () => {
   // Searches for pokemon where the name contains the search term
   const searchPokemon = (e) => {
     e.preventDefault();
+    setLimit(20);
     const results = pokemon.filter(x => x.name.includes(search));
     setListPokemon(results);
   }
+
 
   return (
     <div className="m-6">
@@ -49,8 +52,10 @@ const Search = () => {
         <button className="bg-red-500 w-32 p-2 rounded text-white" type="submit">Search</button>
       </form>
       <ul className="mt-6 flex flex-row flex-wrap justify-center">
-        {listPokemon.map(item => <li key={item.name}><SearchLink name={item.name} /></li>)}
+        {listPokemon.slice(0, limit).map(item => <li key={item.name}><SearchLink name={item.name} /></li>)}
       </ul>
+      <button className="block bg-red-500 mx-auto w-full md:w-3/4 p-2 mt-6 rounded text-white"
+              onClick={() => setLimit(limit + 20)}>Load more</button>
     </div>
   );
 }
