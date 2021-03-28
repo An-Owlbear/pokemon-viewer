@@ -1,3 +1,5 @@
+const defaultTheme = require('tailwindcss/defaultTheme');
+
 module.exports = {
   purge: {
     content: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
@@ -15,7 +17,10 @@ module.exports = {
         'special-attack': '#9DB7F5',
         'special-defense': '#A7DB8D',
         'speed': '#FA92B2'
-      }
+      },
+      fontFamily: {
+        sans: ['Inter var', ...defaultTheme.fontFamily.sans],
+      },
     },
     minWidth: {
       '96': '24rem',
