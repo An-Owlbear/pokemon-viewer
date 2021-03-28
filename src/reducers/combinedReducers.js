@@ -1,8 +1,12 @@
 import { pokemonReducer } from './pokemonReducer';
-import { combineReducers } from 'redux';
+import { combineReducers, createStore } from 'redux';
+import { errorReducer } from './errorReducer';
 
 const combinedReducers = combineReducers({
-  pokemon: pokemonReducer
+  pokemon: pokemonReducer,
+  errors: errorReducer
 });
 
-export default combinedReducers;
+const store = createStore(combinedReducers, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+
+export default store;

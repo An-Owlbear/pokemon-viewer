@@ -7,13 +7,12 @@ import Index from './pages';
 import Search from './pages/search';
 import Pokemon from './pages/pokemon';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
-import combinedReducers from './reducers/combinedReducers';
-
-
-const store = createStore(combinedReducers, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+import store from './reducers/combinedReducers';
+import ErrorPopup from './components/errorPopup';
 
 const Home = () => {
+  const state = store.getState();
+
   return (
     <Provider store={store}>
       <Router>
@@ -23,6 +22,9 @@ const Home = () => {
           <Route path="/search" component={Search} />
           <Route path="/" component={Index} />
         </Switch>
+        <ul className="absolute w-full mx-auto block bottom-0">
+          {state.errors.map(x => <ErrorPopup key={x.id} error={x} />)}
+        </ul>
       </Router>
     </Provider>
   );
