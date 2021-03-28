@@ -21,15 +21,10 @@ const SearchLink = ({ name }) => {
     loadInfo();
   }, [name]);
 
-  // Gets url, accounting for the case that it is an empty object
-  const getUrl = () => {
-    return pokemon.info?.sprites?.other["official-artwork"].front_default;
-  };
-
   return (
     <Link className="block p-2 m-4 bg-gray-100 rounded transition-colors select-none shadow-md hover:bg-red-500 hover:text-white" to={`/pokemon/${name}`}>
       {loading && <div className="w-52 h-52 bg-gray-300 animate-pulse" />}
-      <img className={`w-52 h-52 ${loading ? 'hidden' : ''}`} src={pokemon.info?.sprites?.other["official-artwork"].front_default}
+      <img className={`w-52 h-52 ${loading ? 'hidden' : ''}`} src={pokemon.info?.sprites.other["official-artwork"].front_default ?? pokemon.info?.sprites.front_default}
            alt={name} onLoad={() => setLoading(false)} />
       <p className="text-2xl text-center" >{name}</p>
     </Link>
