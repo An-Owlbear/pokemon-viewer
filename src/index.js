@@ -9,6 +9,7 @@ import Pokemon from './pages/pokemon';
 import { Provider } from 'react-redux';
 import store from './reducers/combinedReducers';
 import ErrorPopup from './components/errorPopup';
+import TeamBuilder from './pages/teamBuilder';
 
 const Home = () => {
   const state = store.getState();
@@ -17,11 +18,16 @@ const Home = () => {
     <Provider store={store}>
       <Router>
         <Navbar className="sticky top-0 z-10" />
-        <Switch>
-          <Route path="/pokemon/:id" component={Pokemon} />
-          <Route path="/search" component={Search} />
-          <Route path="/" component={Index} />
-        </Switch>
+        <div className="flex flex-row">
+          <div className="flex-grow">
+            <Switch>
+              <Route path="/pokemon/:id" component={Pokemon} />
+              <Route path="/search" component={Search} />
+              <Route path="/" component={Index} />
+            </Switch>
+          </div>
+          <TeamBuilder className="m-4 ml-0 flex-shrink-0" />
+        </div>
         <ul className="absolute w-full mx-auto block bottom-0">
           {state.errors.map(x => <ErrorPopup key={x.id} error={x} />)}
         </ul>
