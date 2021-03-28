@@ -11,6 +11,7 @@ import store from './reducers/combinedReducers';
 import ErrorPopup from './components/errorPopup';
 import TeamBuilder from './pages/teamBuilder';
 import Move from './pages/move';
+import ScrollToTop from './components/scrollToTop';
 
 const Home = () => {
   const state = store.getState();
@@ -18,6 +19,7 @@ const Home = () => {
   return (
     <Provider store={store}>
       <Router>
+        <ScrollToTop />
         <Navbar className="sticky top-0 z-10" />
         <div className="flex flex-row">
           <div className="flex-grow overflow-x-hidden">
