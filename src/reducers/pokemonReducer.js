@@ -9,14 +9,14 @@ export const pokemonReducer = (state = [], action) => {
   }
 
   return state;
-}
+};
 
 export const setPokemon = (pokemon) => {
   return {
     type: 'SET_LIST',
     data: pokemon
   }
-}
+};
 
 export const updatePokemon = (item, updated) => {
   return {
@@ -26,4 +26,4 @@ export const updatePokemon = (item, updated) => {
       updated: updated
     }
   }
-}
+};

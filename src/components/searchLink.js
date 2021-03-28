@@ -20,16 +20,16 @@ const SearchLink = ({ name }) => {
 
       // Retrieves and sets information
       const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`);
-      const updatedPokemon = { ...pokemon, info: response.data }
-      dispatch(updatePokemon(pokemon, updatedPokemon))
+      const updatedPokemon = { ...pokemon, info: response.data };
+      dispatch(updatePokemon(pokemon, updatedPokemon));
       setPokemon(updatedPokemon);
-    }
+    };
     loadInfo();
-  }, [dispatch, name, pokemon])
+  }, [dispatch, name, pokemon]);
 
   const getUrl = () => {
     return pokemon.info?.sprites?.other["official-artwork"].front_default;
-  }
+  };
 
   return (
     <Link className="block p-2 m-4 bg-gray-100 rounded transition-all hover:bg-red-500 hover:text-white" to={`/pokemon/${name}`}>
@@ -38,6 +38,6 @@ const SearchLink = ({ name }) => {
       <p className="text-2xl text-center" >{name}</p>
     </Link>
   );
-}
+};
 
 export default SearchLink;

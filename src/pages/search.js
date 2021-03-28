@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import SearchLink from '../components/searchLink';
 import TextInput from '../components/textInput';
@@ -29,9 +29,9 @@ const Search = () => {
       dispatch(setPokemon(response.data.results));
       setListPokemon(response.data.results);
       setLoading(false);
-    }
+    };
     loadPokemon();
-  }, [dispatch, pokemon])
+  }, [dispatch, pokemon]);
 
   // Updates the search term value
   const updateSearch = (e) => setSearch(e.target.value);
@@ -42,7 +42,7 @@ const Search = () => {
     setLimit(20);
     const results = pokemon.filter(x => x.name.includes(search));
     setListPokemon(results);
-  }
+  };
 
 
   return (
@@ -58,6 +58,6 @@ const Search = () => {
               onClick={() => setLimit(limit + 20)}>Load more</button>
     </div>
   );
-}
+};
 
 export default Search;
