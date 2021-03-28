@@ -31,7 +31,7 @@ const Home = () => {
           </div>
           <TeamBuilder className="hidden m-4 ml-0 flex-shrink-0 md:block" />
         </div>
-        <ul className="absolute w-full mx-auto block bottom-0">
+        <ul className="absolute w-max left-0 right-0 mx-auto block bottom-0">
           {state.errors.map(x => <ErrorPopup key={x.id} error={x} />)}
         </ul>
       </Router>
