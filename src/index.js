@@ -22,11 +22,14 @@ const Home = () => {
           <div className="flex-grow">
             <Switch>
               <Route path="/pokemon/:id" component={Pokemon} />
+              <Route path="/team-builder">
+                <TeamBuilder className="mt-4" />
+              </Route>
               <Route path="/search" component={Search} />
               <Route path="/" component={Index} />
             </Switch>
           </div>
-          <TeamBuilder className="m-4 ml-0 flex-shrink-0" />
+          <TeamBuilder className="hidden m-4 ml-0 flex-shrink-0 md:block" />
         </div>
         <ul className="absolute w-full mx-auto block bottom-0">
           {state.errors.map(x => <ErrorPopup key={x.id} error={x} />)}
