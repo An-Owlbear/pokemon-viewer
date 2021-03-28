@@ -15,13 +15,13 @@ client.interceptors.response.use(
 );
 
 // Requests the pokemon list from the API
-export const getPokemonList = async () => {
+export const getApiPokemonList = async () => {
   const response = await client.get('/pokemon?limit=-1');
   return response.data.results;
 };
 
 // Request pokemon info from the API
-export const getPokemonInfo = async (name) => {
+export const getApiPokemonInfo = async (name) => {
   const response = await client.get(`/pokemon/${name}`);
   return response.data;
 };

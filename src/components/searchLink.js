@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { updatePokemon } from '../reducers/pokemonReducer';
-import { getPokemonInfo } from '../services/pokemonService';
+import { updatePokemonAction } from '../reducers/pokemonReducer';
+import { getApiPokemonInfo } from '../services/pokemonService';
 
 
 const SearchLink = ({ name }) => {
@@ -20,9 +20,9 @@ const SearchLink = ({ name }) => {
 
       // Retrieves and sets information
       try{
-        const response = await getPokemonInfo(name);
+        const response = await getApiPokemonInfo(name);
         const updatedPokemon = { ...pokemonState, info: response };
-        dispatch(updatePokemon(pokemonState, updatedPokemon));
+        dispatch(updatePokemonAction(pokemonState, updatedPokemon));
         setPokemon(updatedPokemon);
       }
       catch (e) {

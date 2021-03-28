@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
-import { updatePokemon } from '../reducers/pokemonReducer';
+import { updatePokemonAction } from '../reducers/pokemonReducer';
 import Spinner from '../components/spinner';
 
 const Pokemon = () => {
@@ -23,7 +23,7 @@ const Pokemon = () => {
       // Retrieves and sets information
       const response = axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`);
       const updatedPokemon = { ...pokemon, info: response.data };
-      dispatch(updatePokemon(pokemon, updatedPokemon));
+      dispatch(updatePokemonAction(pokemon, updatedPokemon));
       setLoading(false);
     };
     loadPokemon();

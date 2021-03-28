@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import SearchLink from '../components/searchLink';
 import TextInput from '../components/textInput';
 import { useDispatch, useSelector } from 'react-redux';
-import { getPokemonList } from '../services/pokemonService';
-import { setPokemon } from '../reducers/pokemonReducer';
+import { getApiPokemonList } from '../services/pokemonService';
+import { setPokemonAction } from '../reducers/pokemonReducer';
 
 const Search = () => {
   // Loads pokemon from store
@@ -26,8 +26,8 @@ const Search = () => {
 
       // Requests and loads data
       try {
-        const response = await getPokemonList();
-        dispatch(setPokemon(response));
+        const response = await getApiPokemonList();
+        dispatch(setPokemonAction(response));
         setListPokemon(response);
         setLoading(false);
       } catch (e) {
