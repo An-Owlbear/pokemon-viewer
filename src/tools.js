@@ -9,7 +9,8 @@ const getLevelUpDetails = (move) => {
   // Returns move name and latest learn level
   return {
     name: move.move.name,
-    levelLearned: levelUpVersions[levelUpVersions.length - 1].level_learned_at
+    levelLearned: levelUpVersions[levelUpVersions.length - 1].level_learned_at,
+    type: 'levelup'
   };
 };
 
@@ -28,7 +29,8 @@ const getEggMoveDetails = (move) => {
   // Returns move name
   return {
     name: move.move.name,
-    levelLearned: 0
+    levelLearned: 0,
+    type: 'egg'
   }
 };
 

@@ -27,3 +27,9 @@ export const getApiPokemonInfo = async (name) => {
   const response = await client.get(`/pokemon/${name}`);
   return response.data;
 };
+
+// Gets move info from the API
+export const getApiMove = async (name) => {
+  const response = await client.get(`/move/${name}`);
+  return response.data;
+};

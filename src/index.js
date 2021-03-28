@@ -10,6 +10,7 @@ import { Provider } from 'react-redux';
 import store from './reducers/combinedReducers';
 import ErrorPopup from './components/errorPopup';
 import TeamBuilder from './pages/teamBuilder';
+import Move from './pages/move';
 
 const Home = () => {
   const state = store.getState();
@@ -21,6 +22,7 @@ const Home = () => {
         <div className="flex flex-row">
           <div className="flex-grow overflow-x-hidden">
             <Switch>
+              <Route path="/move/:id" component={Move} />
               <Route path="/pokemon/:id" component={Pokemon} />
               <Route path="/team-builder">
                 <TeamBuilder className="mt-4" />

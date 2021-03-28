@@ -1,6 +1,7 @@
 import store from '../reducers/combinedReducers';
-import { getApiPokemonInfo, getApiPokemonList } from './pokemonApiService';
+import { getApiMove, getApiPokemonInfo, getApiPokemonList } from './pokemonApiService';
 import { setPokemonAction, updatePokemonAction } from '../reducers/pokemonReducer';
+import { setMoveAction } from '../reducers/moveReducer';
 
 // Gets pokemon list from store if available, otherwise queries API
 export const getPokemon = async () => {
@@ -26,4 +27,17 @@ export const getPokemonInfo = async (name) => {
   const updatedPokemon = { ...targetPokemon, info: response };
   store.dispatch(updatePokemonAction(targetPokemon, updatedPokemon));
   return updatedPokemon;
+};
+
+// Gets move info from store or API
+export const getMoveInfo = async (name) => {
+  // Gets move from store, and returns it if already set
+  const state = store.getState();
+  const targetMove = state.moves.find(x => x.name === name);
+  if (targetMove !== undefined) return targetMove;
+
+  // Retrieves move and updates store
+  const response = await getApiMove(name);
+  store.dispatch(setMoveAction(response));
+  return response;
 };
