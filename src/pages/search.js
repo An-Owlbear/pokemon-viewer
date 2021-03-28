@@ -49,12 +49,12 @@ const Search = () => {
     <div className="m-6">
       <form className="flex flex-row space-x-4" onSubmit={searchPokemon}>
         <TextInput className="w-full" placeholder="Search" onBlur={updateSearch} />
-        <button className="bg-red-500 w-32 p-2 rounded text-white" type="submit">Search</button>
+        <button className="bg-red-500 w-32 p-2 rounded text-white shadow-md transition-colors hover:bg-red-600" type="submit">Search</button>
       </form>
       <ul className="mt-6 flex flex-row flex-wrap justify-center">
         {listPokemon.slice(0, limit).map(item => <li key={item.name}><SearchLink name={item.name} /></li>)}
       </ul>
-      <button className="block bg-red-500 mx-auto w-full md:w-3/4 p-2 mt-6 rounded text-white"
+      <button className="block bg-red-500 mx-auto w-full md:w-3/4 p-4 mt-6 rounded text-white shadow-md transition-colors hover:bg-red-600"
               onClick={() => setLimit(limit + 20)}>Load more</button>
     </div>
   );

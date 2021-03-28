@@ -32,7 +32,7 @@ const SearchLink = ({ name }) => {
   };
 
   return (
-    <Link className="block p-2 m-4 bg-gray-100 rounded transition-all hover:bg-red-500 hover:text-white" to={`/pokemon/${name}`}>
+    <Link className="block p-2 m-4 bg-gray-100 rounded transition-colors select-none shadow-md hover:bg-red-500 hover:text-white" to={`/pokemon/${name}`}>
       {loading && <div className="w-52 h-52 bg-gray-300 animate-pulse" />}
       <img className={`w-52 h-52 ${loading ? 'hidden' : ''}`} src={getUrl()} alt={name} onLoad={() => setLoading(false)} />
       <p className="text-2xl text-center" >{name}</p>
