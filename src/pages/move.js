@@ -34,7 +34,7 @@ const Move = () => {
           <p className="my-2">Accuracy - {move.accuracy}</p>
           <p className="my-2">Power - {move.power}</p>
           <p className="my-2">PP - {move.pp}</p>
-          <p className="my-2">Description - {move.flavor_text_entries[0].flavor_text}</p>
+          <p className="my-2">Description - {move.flavor_text_entries.find(x => x.language.name === 'en').flavor_text}</p>
         </div>
       }
     </>
