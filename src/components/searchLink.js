@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { updatePokemon } from '../reducers/pokemonReducer';
+import { getPokemonInfo } from '../services/pokemonService';
 
 
 const SearchLink = ({ name }) => {
@@ -16,16 +16,21 @@ const SearchLink = ({ name }) => {
   useEffect(() => {
     const loadInfo = async () => {
       // Returns if pokemon information is already stored
-      if (pokemon.info !== undefined) return;
+      if (pokemonState.info !== undefined) return;
 
       // Retrieves and sets information
-      const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`);
-      const updatedPokemon = { ...pokemon, info: response.data };
-      dispatch(updatePokemon(pokemon, updatedPokemon));
-      setPokemon(updatedPokemon);
+      try{
+        const response = await getPokemonInfo(name);
+        const updatedPokemon = { ...pokemonState, info: response };
+        dispatch(updatePokemon(pokemonState, updatedPokemon));
+        setPokemon(updatedPokemon);
+      }
+      catch (e) {
+        console.log(e)
+      }
     };
     loadInfo();
-  }, [dispatch, name, pokemon]);
+  }, [dispatch, name, pokemonState]);
 
   const getUrl = () => {
     return pokemon.info?.sprites?.other["official-artwork"].front_default;

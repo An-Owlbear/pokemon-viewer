@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import SearchLink from '../components/searchLink';
 import TextInput from '../components/textInput';
 import { useDispatch, useSelector } from 'react-redux';
+import { getPokemonList } from '../services/pokemonService';
 import { setPokemon } from '../reducers/pokemonReducer';
 
 const Search = () => {
@@ -25,10 +25,14 @@ const Search = () => {
       }
 
       // Requests and loads data
-      const response = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=-1');
-      dispatch(setPokemon(response.data.results));
-      setListPokemon(response.data.results);
-      setLoading(false);
+      try {
+        const response = await getPokemonList();
+        dispatch(setPokemon(response));
+        setListPokemon(response);
+        setLoading(false);
+      } catch (e) {
+        console.log(e)
+      }
     };
     loadPokemon();
   }, [dispatch, pokemon]);
