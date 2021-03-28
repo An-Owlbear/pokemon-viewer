@@ -7,6 +7,7 @@ import Stat from '../components/stat';
 import MoveLink from '../components/moveLink';
 import { useDispatch } from 'react-redux';
 import { addTeamPokemon } from '../reducers/teamReducer';
+import { getEggMoves, getLevelUpMoves } from '../tools';
 
 const Pokemon = () => {
   const dispatch = useDispatch();
@@ -43,8 +44,10 @@ const Pokemon = () => {
             <button className="block w-full my-4 p-4 text-white bg-red-500 rounded shadow-lg" onClick={() => dispatch(addTeamPokemon(name))}>Add to team</button>
           </div>
           <div className="flex-grow">
-            <p className="text-3xl font-bold mb-4">Moves</p>
-            {pokemon.info?.moves.map(x => <MoveLink key={x.move.name} move={x} />)}
+            <p className="text-3xl font-bold mb-4">Level up moves</p>
+            {getLevelUpMoves(pokemon.info?.moves ?? []).map(x => <MoveLink key={`${x.name}-levelup`} move={x} />)}
+            <p className="text-3xl font-bold my-4">Egg moves</p>
+            {getEggMoves(pokemon.info?.moves ?? []).map(x => <MoveLink key={`${x.name}-egg`} move={x} />)}
           </div>
         </div>
       }
