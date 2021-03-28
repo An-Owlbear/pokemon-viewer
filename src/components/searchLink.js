@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { updatePokemonAction } from '../reducers/pokemonReducer';
-import { getApiPokemonInfo } from '../services/pokemonService';
+import { getApiPokemonInfo } from '../services/pokemonApiService';
 
 
 const SearchLink = ({ name }) => {

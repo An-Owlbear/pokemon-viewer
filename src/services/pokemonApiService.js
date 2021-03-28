@@ -1,11 +1,13 @@
 import axios from 'axios';
+import store from '../reducers/combinedReducers';
+import { addError } from '../reducers/errorReducer';
 
 const client = axios.create({
   baseURL: 'https://pokeapi.co/api/v2/'
 });
 
 const errorHandler = (error) => {
-  console.log(error);
+  store.dispatch(addError(error.message));
   return Promise.reject(error)
 };
 

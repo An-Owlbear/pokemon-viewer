@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import SearchLink from '../components/searchLink';
 import TextInput from '../components/textInput';
 import { useDispatch, useSelector } from 'react-redux';
-import { getApiPokemonList } from '../services/pokemonService';
+import { getApiPokemonList } from '../services/pokemonApiService';
 import { setPokemonAction } from '../reducers/pokemonReducer';
 
 const Search = () => {
