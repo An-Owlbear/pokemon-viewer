@@ -13,7 +13,7 @@ import { addError } from '../reducers/errorReducer';
 const Pokemon = () => {
   const dispatch = useDispatch();
   const teamPokemon = useSelector(x => x.team);
-  let name = useParams().id;
+  const name = useParams().id;
 
   const [pokemon, setPokemon] = useState({});
   const [loading, setLoading] = useState(true);
