@@ -1,41 +1,30 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import SearchLink from '../components/searchLink';
 import TextInput from '../components/textInput';
-import { useDispatch, useSelector } from 'react-redux';
-import { getApiPokemonList } from '../services/pokemonApiService';
-import { setPokemonAction } from '../reducers/pokemonReducer';
+import { getPokemon } from '../services/pokemonStoreService';
 
 const Search = () => {
   // Loads pokemon from store
-  const dispatch = useDispatch();
-  const pokemon = useSelector(x => x.pokemon);
+  const pokemon = useRef([]);
 
   // Component state
-  const [loading, setLoading ] = useState(true);
-  const [listPokemon, setListPokemon] = useState(pokemon);
+  const [listPokemon, setListPokemon] = useState([]);
   const [search, setSearch] = useState('');
   const [limit, setLimit] = useState(20);
 
   useEffect(() => {
     // Loads pokemon from the api
     const loadPokemon = async () => {
-      // Returns if data is already loaded
-      if (pokemon.length !== 0) {
-        return;
-      }
-
-      // Requests and loads data
       try {
-        const response = await getApiPokemonList();
-        dispatch(setPokemonAction(response));
-        setListPokemon(response);
-        setLoading(false);
-      } catch (e) {
-        console.log(e)
+        pokemon.current = await getPokemon();
+        setListPokemon(pokemon.current);
+      }
+      catch (e) {
+        console.log(e);
       }
     };
     loadPokemon();
-  }, [dispatch, pokemon]);
+  }, []);
 
   // Updates the search term value
   const updateSearch = (e) => setSearch(e.target.value);
@@ -44,7 +33,7 @@ const Search = () => {
   const searchPokemon = (e) => {
     e.preventDefault();
     setLimit(20);
-    const results = pokemon.filter(x => x.name.includes(search));
+    const results = pokemon.current.filter(x => x.name.includes(search));
     setListPokemon(results);
   };
 
